@@ -7,6 +7,8 @@ import { Head } from '@inertiajs/vue3';
     <Head title="Dashboard"/>
 
     <AuthenticatedLayout>
-
+        <template #main-content?>
+            Hel
+        </template>
     </AuthenticatedLayout>
 </template>

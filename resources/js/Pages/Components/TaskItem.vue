@@ -3,7 +3,20 @@ import { defineProps } from "vue";
 import { computed } from "vue";
 import PrimaryButton from "./PrimaryButton.vue";
 
-const props = defineProps(["taskName", "taskDueDate", "taskStatus"]);
+const props = defineProps({
+    taskName: {
+        type: String,
+        required: true,
+    },
+    taskDueDate: {
+        type: String,
+        required: true,
+    },
+    taskStatus: {
+        type: String,
+        required: true,
+    },
+});
 
 const buttonText = computed(() => {
     switch (props.taskStatus) {
@@ -32,8 +45,8 @@ const btn_bg = computed(() => {
     <div
         class="w-1/2 flex flex-row justify-between p-3 rounded-md m-4 bg-gray-50 hover:cursor-pointer"
     >
-        <p>{{ taskName }}</p>
-        <p>{{ taskDueDate }}</p>
+        <p>{{ props.taskName }}</p>
+        <p>{{ props.taskDueDate }}</p>
         <PrimaryButton>{{ buttonText }}</PrimaryButton>
     </div>
 </template>

@@ -22,7 +22,7 @@ const showingNavigationDropdown = ref(false);
                                 class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
                             >
                                 <NavLink
-                                    :href="route('dashboard')"
+                                    :href="$page.props.auth.user.role_id == 1 ? route('admin.dashboard') : route('user.home')"
                                     :active="route().current('dashboard')"
                                 >
                                     Task Management System
@@ -163,11 +163,11 @@ const showingNavigationDropdown = ref(false);
                 </div>
             </nav>
 
-            <div class="flex flex-row justify-between border">
+            <div class="flex flex-row justify-around border">
                 <aside
                     class="border-r-2 border-b-2 w-1/5 h-[95vh] flex flex-col items-center bg-gray-50"
                 >
-                    <UserSideNav />
+                    <slot name="sidenav"></slot>
                 </aside>
 
                 <!-- Page Content -->
