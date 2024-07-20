@@ -1,48 +1,46 @@
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head } from '@inertiajs/vue3';
-import PrimaryButton from "../Components/PrimaryButton.vue";
-import UserSideNav from '../Components/UserSideNav.vue';
-import {useForm} from "@inertiajs/vue3";
-import { useToast } from "vue-toast-notification";
-import "vue-toast-notification/dist/theme-sugar.css";
+import { reactive, defineProps } from 'vue'
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import AdminSideNav from '../Components/AdminSideNav.vue';
+import PrimaryButton from '../Components/PrimaryButton.vue';
+import { useForm } from '@inertiajs/vue3';
+import { onErrorCaptured } from 'vue';
 
-const toast = useToast();
-const formData = useForm({
-    task_name: "",
-    task_due_date: "",
-    task_description: ""
+const props = defineProps({
+    users: {
+        type: Array,
+        required: true
+    }
 })
 
-const submit = () => {
+
+const formData = useForm({
+  task_name: null,
+  task_description: null,
+  person_assigned: null,
+  due_date: null
+})
+
+function submit() {
     console.log(formData);
-    formData.post(route('tasks.store'), {
+    formData.post(route('admin.store'), {
         onSuccess: () => {
             console.log("TASK CREATED SUCCESSFULLY")
-            formData.reset()
-            toast.success("Task created successfully", {
-                position: "top-right",
-                duration: 2000
-            })
         },
         onError: (error) => {
             console.error("AN ERROR OCCURRED WHILE CREATING TASK")
             console.error(error)
-            toast.error("An error occurred while creating task", {
-                position: "top-right",
-                duration: 2000
-            })
         }
-    })
+    }
+);
 }
-
 </script>
 
 <template>
-    <AuthenticatedLayout>
+ <AuthenticatedLayout>
         <Head title="Create" />
         <template #sidenav>
-                  <UserSideNav></UserSideNav>
+                  <AdminSideNav></AdminSideNav>
             </template>
         <template #main-content>
             <div class="w-full h-full">
@@ -69,6 +67,16 @@ const submit = () => {
                             <label for="task_description">Task Description</label> <br>
                             <textarea v-model="formData.task_description" class="w-full" cols="20" rows="5"></textarea>
                         </div>
+                        
+
+                        <div class="m-4 w-3/4">
+                            <label for="person_assigned">Person Assigned</label> <br>
+                            <select v-model="formData.person_assigned" name="person_assigned" id="person_assigned">
+                                <option v-for="user in users" :value="user.id">{{ user.name }}</option>
+                            </select>
+                        </div>
+
+
                         <div class="m-4 w-3/4">
                             <label for="task_due_date">Due Date</label> <br>
                             <input
@@ -76,7 +84,7 @@ const submit = () => {
                                 name="task_due_date"
                                 id="task_due_date"
                                 class="border rounded-md p-1 w-full h-10 placeholder:font-serif placeholder:text-sm"
-                                v-model="formData.task_due_date"
+                                v-model="formData.due_date"
                             />
                         </div>
                         <br>

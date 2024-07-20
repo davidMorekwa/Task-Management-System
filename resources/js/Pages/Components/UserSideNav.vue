@@ -19,7 +19,7 @@ import { Link } from '@inertiajs/vue3';
             <Link :href="route('user.overdue')" class="w-full flex flex-row justify-center p-3 rounded-md m-5 bg-gray-50 hover:bg-gray-300 hover:cursor-pointer"> <!-- change bg color on click -->
                   <p>Overdue Tasks</p> 
             </Link>
-            <Link :href="route('tasks.index')" class="w-full flex flex-row justify-center p-3 rounded-md m-5 bg-gray-50 hover:bg-gray-300 hover:cursor-pointer"> <!-- change bg color on click -->
+            <Link :href="route('tasks.create')" class="w-full flex flex-row justify-center p-3 rounded-md m-5 bg-gray-50 hover:bg-gray-300 hover:cursor-pointer"> <!-- change bg color on click -->
                   <p>Create Tasks</p> 
             </Link>
       </div>
