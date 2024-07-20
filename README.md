@@ -65,16 +65,16 @@ DB_PASSWORD=your_database_password
 php artisan migrate
 ```
 7. Seed th database
-This file the 'roles' table with initial values
+- This fils the 'roles' table with initial values
 ```sh
 php artisan db:seed
 ```
 8. Starts development servers
-To start the backend server, run the following in a terminal
+- To start the backend server, run the following in a terminal
 ```sh
 php artisan serve
 ```
-On a new terminal window/tab, run the following to compile the frontend assets
+- On a new terminal window/tab, run the following to compile the frontend assets
 ```sh
 npm run dev
 ```
